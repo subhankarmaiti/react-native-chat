@@ -26,18 +26,15 @@ export default function Home() {
   };
   return (
     <View style={{ flex: 1 }}>
-      {hasJoin ? (
-        <GiftedChat
-          renderUsernameOnMessage
-          messages={receivedMessages}
-          onSend={messages => onSend(messages)}
-          user={{
-            _id: 1
-          }}
-        />
-      ) : (
-        <Join joinChat={joinChat} />
-      )}
+      <GiftedChat
+        renderUsernameOnMessage
+        messages={receivedMessages}
+        onSend={messages => onSend(messages)}
+        user={{
+          _id: 1
+        }}
+      />
+
       {Platform.OS === "android" && <KeyboardAvoidingView behavior="padding" />}
     </View>
   );

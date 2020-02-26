@@ -7,7 +7,10 @@ import {
   Platform,
   KeyboardAvoidingView
 } from "react-native";
+
+import { useDispatch } from "react-redux";
 export default function Join(props) {
+  const dispatch = useDispatch();
   const [username, setUsername] = useState("");
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -23,9 +26,15 @@ export default function Join(props) {
           value={username}
           onChangeText={setUsername}
         />
-        <Button title="Join Chat" onPress={() => props.joinChat(username)} />
+        <Button
+          title="Join Chat"
+          onPress={() => {
+            dispatch({ type: "server/join", payload: username });
+            props.navigation.navigate("App");
+          }}
+        />
       </View>
-      {Platform.OS === "ios" && <KeyboardAvoidingView behavior="padding" />}
+      <KeyboardAvoidingView behavior="padding" />
     </View>
   );
 }
